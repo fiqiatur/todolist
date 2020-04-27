@@ -33,12 +33,14 @@ const item3 = new Item({
   name: 'selamat datang di catatan bulanan'
 });
 
+
+
 const defaultItems = [item1, item2, item3]
 
 
 
 
-app.get("/", function (req, res) {
+app.get("/", function (req, res)  {
 
   Item.find({}, (err, foundItems) => {
 
@@ -59,12 +61,12 @@ app.get("/", function (req, res) {
       })
     }
 
-    // console.log(foundItems);
 
 
   });
 });
 
+//create
 app.post("/", function (req, res) {
 
   const itemName = req.body.newItem;
@@ -76,6 +78,20 @@ app.post("/", function (req, res) {
   item.save()
   res.redirect('/')
 });
+
+//delete
+app.post('/delete', function (req, res)  {
+  const checkItemId = req.body.checkbox;
+
+  Item.findOneAndDelete(checkItemId, (err => {   //find by id is not working again
+    if (!err) {
+      console.log('berhasil dihapus');
+      res.redirect('/');
+    }
+  }))
+
+})
+
 
 app.get("/work", function (req, res) {
   res.render("list", {
