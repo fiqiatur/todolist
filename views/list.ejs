@@ -14,9 +14,10 @@
   <% newListItems.forEach(item => { %>
   <form action="/delete" method="post">
     <div class="item">
-      <input name="checkbox" type="checkbox" value="<%= item._id %> " onChange="this.form.submit()"> 
+      <input name="checkbox" type="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
       <p><%= item.name %></p>
     </div>
+    <input type="hidden" name="listName" value="<%= listTitle %>"></input>
   </form>
 
   <% }); %>
@@ -28,8 +29,10 @@
 
   <form class="item" action="/" method="post">
     <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-    <button type="submit" name="list">+</button>
+    <button type="submit" name="list" value="<%= listTitle %>">+</button>
   </form>
+
+  <!-- perhatikan spasi di string ejs  harus rapat menghimpit tanda panah tanpa spasi-->
 </div>
 
 <%- include("footer") -%>
