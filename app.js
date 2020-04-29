@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const _ = require('lodash')
 
 const app = express();
 
@@ -12,7 +13,8 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 
 mongoose.connect('mongodb://localhost:27017/todolistDB', {
-  useNewUrlParser: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 const itemsSchema = {
@@ -73,7 +75,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:customListName', (req, res) => {
-  const customListName = req.params.customListName
+  const customListName = _.capitalize(req.params.customListName)
 
   List.findOne({
     name: customListName
