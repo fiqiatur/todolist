@@ -12,10 +12,13 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect('mongodb://localhost:27017/todolistDB', {
+mongoose.connect('mongodb+srv://akavendetta:akavendetta221096@cluster0-3p2qd.mongodb.net/test?retryWrites=true&w=todolistDB', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
+
+
+
 
 const itemsSchema = {
   name: String
